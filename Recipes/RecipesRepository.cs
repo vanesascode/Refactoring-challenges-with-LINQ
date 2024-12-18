@@ -61,17 +61,25 @@ public class RecipesRepository : IRecipesRepository
 
     public void Write(string filePath, List<Recipe> allRecipes)
     {
-        var recipesAsStrings = new List<string>();
-        foreach (var recipe in allRecipes)
-        {
-            var allIds = new List<int>();
-            foreach (var ingredient in recipe.Ingredients)
-            {
-                allIds.Add(ingredient.Id);
-            }
-            recipesAsStrings.Add(string.Join(Separator, allIds));
-        }
+        //var recipesAsStrings = new List<string>();
+        //foreach (var recipe in allRecipes)
+        //{
+        //    var allIds = new List<int>();
+        //    foreach (var ingredient in recipe.Ingredients)
+        //    {
+        //        allIds.Add(ingredient.Id);
+        //    }
+        //    recipesAsStrings.Add(string.Join(Separator, allIds));
+        //}
 
-        _stringsRepository.Write(filePath, recipesAsStrings);
+        //_stringsRepository.Write(filePath, recipesAsStrings);
+
+        var recipesAsStrings = allRecipes.Select(recipe =>
+        {
+            var allIds = recipe.Ingredients.Select(ingredient => ingredient.Id);
+            return string.Join(Separator, allIds);
+        });
+
+        _stringsRepository.Write(filePath, recipesAsStrings.ToList());
     }
 }
