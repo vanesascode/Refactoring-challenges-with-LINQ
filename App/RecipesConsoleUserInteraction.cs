@@ -49,8 +49,8 @@ $@"********{index + 1}*******
 {recipe}");
 
             Console.WriteLine(
-                string.Join(Environment.NewLine, allRecipesAsStrings) );
-            Console.WriteLine();          
+                string.Join(Environment.NewLine, allRecipesAsStrings));
+            Console.WriteLine();
         }
     }
 
@@ -59,10 +59,13 @@ $@"********{index + 1}*******
         Console.WriteLine("Create a new cookie recipe! " +
             "Available ingredients are:");
 
-        foreach (var ingredient in _ingredientsRegister.All)
-        {
-            Console.WriteLine(ingredient);
-        }
+        //foreach (var ingredient in _ingredientsRegister.All)
+        //{
+        //    Console.WriteLine(ingredient);
+        //}
+
+        Console.WriteLine(string.Join(Environment.NewLine, _ingredientsRegister.All));
+
     }
 
     public IEnumerable<Ingredient> ReadIngredientsFromUser()
